@@ -1,6 +1,6 @@
 function FindDuplicate(array) {
   let map = new Map();
-  for (var i = 0; i < array.length; i++) {
+  for (var i in array) {
     let temp = array[i];
     if (!map.has(temp)) {
       map.set(temp, 0);
