@@ -1,14 +1,14 @@
 function FindDuplicate(array) {
-  let map = new Map();
-  for (var i of array) {
-    if (!map.has(i)) {
-      map.set(i, 0);
+  let set = new Set();
+  for (var num of array) {
+    if (!set.has(num)) {
+      set.add(num);
     } else {
-      return i;
+      return num;
     }
   }
   return -1;
 }
-var array = [1, 2, 3, 2, 3];
+var array = [1, 2, 3, 4, 2, 4, 5, 5, 3];
 let output = FindDuplicate(array);
 console.log(output);
