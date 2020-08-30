@@ -1,52 +1,22 @@
-function evenlengthNonRepeatingChar(characterArray) {
-  var set = new Set();
-  for (var char of characterArray) {
-    if (!set.has(char)) {
-      set.add(char);
-    } else {
-      set.delete(char);
-    }
-  }
-  if (set.size != 0) {
-    var iterator = set.keys();
-    var firstNonRepeatingChar = iterator.next().value;
-    return firstNonRepeatingChar;
-  } else {
-    return "_";
-  }
-}
-
-function oddlengthNonRepeatingChar(characterArray) {
-  var set = new Set();
-  for (var char = 0; char < characterArray.length; char++) {
-    if (
-      !set.has(characterArray[char]) &&
-      characterArray[char] != characterArray[char - 1] &&
-      characterArray[char] != characterArray[char + 1]
-    ) {
-      set.add(characterArray[char]);
-    } else {
-      set.delete(characterArray[char]);
-    }
-  }
-  if (set.size !== 0) {
-    var iterator = set.keys();
-    var firstNonRepeatingChar = iterator.next().value;
-    return firstNonRepeatingChar;
-  } else {
-    return "_";
-  }
-}
-
 function nonRepeatingCharacter(inputString) {
   var characterArray = inputString.split("");
-  var sizeOfArray = characterArray.length;
-  if (sizeOfArray % 2 !== 0) {
-    return oddlengthNonRepeatingChar(characterArray);
-  } else {
-    return evenlengthNonRepeatingChar(characterArray);
+  var map = new Map();
+  for (var num of characterArray) {
+    if (map.has(num)) {
+      var valueStored = map.get(num);
+      map.set(num, valueStored + 1);
+    } else {
+      map.set(num, 1);
+    }
   }
+
+  for (var [key, value] of map.entries()) {
+    if (value === 1) {
+      return key;
+    }
+  }
+  return "_";
 }
-var inputString = "abacabaabacaba";
+var inputString = "abacabad";
 var firstNonRepeatingChar = nonRepeatingCharacter(inputString);
 console.log(firstNonRepeatingChar);
